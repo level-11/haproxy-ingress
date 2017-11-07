@@ -78,9 +78,11 @@ backend {{ $backend.Name }}
 ###### HTTP frontend
 ######
 frontend httpfront
-    bind *:::80{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
+    bind *:80{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
+    bind :::80{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
 {{- if and $hasHTTPStoHTTP (not $reuseHTTPPort) }}
-    bind *:::{{ $cfg.HTTPStoHTTPPort }}{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
+    bind *:{{ $cfg.HTTPStoHTTPPort }}{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
+    bind :::{{ $cfg.HTTPStoHTTPPort }}{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
 {{- end }}
     mode http
 
@@ -156,7 +158,8 @@ frontend httpfront
 ###### HTTPS frontend (tcp mode)
 ######
 frontend httpsfront
-    bind *:::443{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
+    bind *:443{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
+    bind :::443{{ if $cfg.UseProxyProtocol }} accept-proxy{{ end }}
     mode tcp
     tcp-request inspect-delay 5s
     tcp-request content accept if { req.ssl_hello_type 1 }
@@ -378,7 +381,8 @@ backend error496
     errorfile 400 /usr/local/etc/haproxy/errors/496.http
     http-request deny deny_status 400
 listen error503noendpoints
-    bind *:::8181
+    bind *:8181
+    bind :::8181
     mode http
     errorfile 503 /usr/local/etc/haproxy/errors/503noendpoints.http
 
@@ -386,7 +390,8 @@ listen error503noendpoints
 ###### Stats page
 ######
 listen stats
-    bind *:::{{ $cfg.StatsPort }}{{ if $cfg.StatsProxyProtocol }} accept-proxy{{ end }}
+    bind *:{{ $cfg.StatsPort }}{{ if $cfg.StatsProxyProtocol }} accept-proxy{{ end }}
+    bind :::{{ $cfg.StatsPort }}{{ if $cfg.StatsProxyProtocol }} accept-proxy{{ end }}
     mode http
     stats enable
     stats realm HAProxy\ Statistics
@@ -400,6 +405,7 @@ listen stats
 ###### Monitor URI
 ######
 frontend healthz
-    bind *:::{{ $cfg.HealthzPort }}
+    bind *:{{ $cfg.HealthzPort }}
+    bind :::{{ $cfg.HealthzPort }}
     mode http
     monitor-uri /healthz
