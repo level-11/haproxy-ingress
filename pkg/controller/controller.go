@@ -18,8 +18,8 @@ package controller
 
 import (
 	"github.com/golang/glog"
-	"github.com/jcmoraisjr/haproxy-ingress/pkg/types"
-	"github.com/jcmoraisjr/haproxy-ingress/pkg/version"
+	"github.com/level-11/haproxy-ingress/pkg/types"
+	"github.com/level-11/haproxy-ingress/pkg/version"
 	"github.com/spf13/pflag"
 	"io/ioutil"
 	api "k8s.io/api/core/v1"

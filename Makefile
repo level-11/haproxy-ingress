@@ -2,14 +2,14 @@
 default: build
 
 REPO_LOCAL=localhost/haproxy-ingress
-REPO_PUBLIC=quay.io/jcmoraisjr/haproxy-ingress
+REPO_PUBLIC=quay.io/level11/haproxy-ingress
 DOCKER_HUB=quay.io
 include container.mk
 
 GOOS=linux
 GOARCH=amd64
 GIT_REPO=$(shell git config --get remote.origin.url)
-ROOT_PKG=github.com/jcmoraisjr/haproxy-ingress/pkg
+ROOT_PKG=github.com/level-11/haproxy-ingress/pkg
 
 .PHONY: build
 build:

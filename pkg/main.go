@@ -18,7 +18,7 @@ package main
 
 import (
 	"github.com/golang/glog"
-	"github.com/jcmoraisjr/haproxy-ingress/pkg/controller"
+	"github.com/level-11/haproxy-ingress/pkg/controller"
 	"os"
 	"os/signal"
 	"syscall"

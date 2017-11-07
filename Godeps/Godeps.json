@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/jcmoraisjr/haproxy-ingress",
+	"ImportPath": "github.com/level-11/haproxy-ingress",
 	"GoVersion": "go1.8",
 	"GodepVersion": "v79",
 	"Packages": [
